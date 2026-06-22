@@ -12,11 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            // 👤 Shared Columns (Admin, Client, and Developer)
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('contact')->nullable(); 
+            $table->string('role')->default('client'); // 'admin', 'client', or 'developer'
+
+            // 💼 Client Specific Columns (Left empty for Admins and Developers)
+            $table->string('company')->nullable(); 
+            $table->decimal('salary', 10, 2)->nullable(); 
+
+            // 💻 Developer Specific Columns (Left empty for Admins and Clients)
+            $table->string('position')->nullable(); 
+
+            // ⚙️ Laravel System Defaults
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
