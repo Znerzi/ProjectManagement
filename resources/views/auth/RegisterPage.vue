@@ -12,7 +12,7 @@
         <p class="text-gray-600 dark:text-gray-400 mt-2">Join PrimeOut Project Management</p>
       </div>
 
-      <!-- Error Alert --> asd
+      <!-- Error Alert -->
       <div
         v-if="error"
         class="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
