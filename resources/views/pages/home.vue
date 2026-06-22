@@ -27,11 +27,12 @@
             >
               {{ link.label }}
             </a>
-            <button
-              class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105"
+<a
+              href="/register/client"
+              class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105 inline-flex items-center justify-center"
             >
-              Get Started
-            </button>
+              Get Started (Client)
+            </a>
           </div>
 
           <!-- Mobile Menu Button -->

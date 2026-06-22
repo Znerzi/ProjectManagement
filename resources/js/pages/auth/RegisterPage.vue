@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-indigo-600 to-indigo-900 py-12 px-4">
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-white py-12 px-4">
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 mx-auto">
       <!-- Header -->
       <div class="text-center mb-8">
@@ -53,54 +53,8 @@
         </div>
 
         <!-- Role Selection -->
-        <div>
-          <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            I am a...
-          </label>
-          <select
-            id="role"
-            v-model="formData.role"
-            required
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white outline-none transition"
-          >
-            <option value="">Select role</option>
-            <option value="client">Client</option>
-            <option value="developer">Developer</option>
-          </select>
-        </div>
-
-        <!-- Client Company Name -->
-        <div v-if="formData.role === 'client'">
-          <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Company Name
-          </label>
-          <input
-            id="company"
-            v-model="formData.company_name"
-            type="text"
-            required
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white outline-none transition"
-            placeholder="Your Company"
-          />
-        </div>
-
-        <!-- Developer Experience Level -->
-        <div v-if="formData.role === 'developer'">
-          <label for="experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Experience Level
-          </label>
-          <select
-            id="experience"
-            v-model="formData.experience_level"
-            required
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white outline-none transition"
-          >
-            <option value="">Select level</option>
-            <option value="junior">Junior</option>
-            <option value="mid">Mid-Level</option>
-            <option value="senior">Senior</option>
-          </select>
-        </div>
+        <!-- Role-specific fields are handled by separate pages:
+             /register/client and /register/developer -->
 
         <!-- Password -->
         <div>
@@ -186,6 +140,12 @@ const formData = reactive({
   password: '',
   password_confirmation: ''
 });
+
+// NOTE: This page is kept for backward compatibility.
+// Client/Developer registration is now separated into:
+// - /register/client
+// - /register/developer
+
 
 const handleRegister = async () => {
   if (formData.password !== formData.password_confirmation) {

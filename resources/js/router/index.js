@@ -5,6 +5,9 @@ import { useAuthStore } from '../stores/auth';
 import HomePage from '../pages/Home.vue';
 import LoginPage from '../pages/auth/LoginPage.vue';
 import RegisterPage from '../pages/auth/RegisterPage.vue';
+import RegisterClientPage from '../pages/auth/RegisterClientPage.vue';
+import RegisterDeveloperPage from '../pages/auth/RegisterDeveloperPage.vue';
+
 
 // Admin Pages
 import AdminDashboard from '../pages/admin/Dashboard.vue';
@@ -39,6 +42,19 @@ const routes = [
         component: RegisterPage,
         meta: { requiresGuest: true }
     },
+    {
+        path: '/register/client',
+        name: 'register-client',
+        component: RegisterClientPage,
+        meta: { requiresGuest: true }
+    },
+    {
+        path: '/register/developer',
+        name: 'register-developer',
+        component: RegisterDeveloperPage,
+        meta: { requiresGuest: true }
+    },
+
 
     // Admin Routes
     {
