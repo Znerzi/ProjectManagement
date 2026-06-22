@@ -12,25 +12,43 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            // 👤 Shared Columns (Admin, Client, and Developer)
+            // 👤 Shared Columns
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('contact')->nullable(); 
-            $table->string('role')->default('client'); // 'admin', 'client', or 'developer'
+            $table->string('phone')->nullable();
+            $table->enum('role', ['admin', 'client', 'developer'])->default('client');
+            $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
+            $table->string('avatar')->nullable();
+            $table->text('bio')->nullable();
 
-            // 💼 Client Specific Columns (Left empty for Admins and Developers)
-            $table->string('company')->nullable(); 
-            $table->decimal('salary', 10, 2)->nullable(); 
+            // 💼 Client Specific Columns
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('company_website')->nullable();
+            $table->string('industry')->nullable();
+            $table->decimal('total_budget', 12, 2)->nullable()->default(0);
 
-            // 💻 Developer Specific Columns (Left empty for Admins and Clients)
-            $table->string('position')->nullable(); 
+            // 💻 Developer Specific Columns
+            $table->string('skills')->nullable(); // JSON array of skills
+            $table->string('experience_level')->nullable(); // 'junior', 'mid', 'senior'
+            $table->decimal('hourly_rate', 8, 2)->nullable();
+            $table->integer('completed_projects')->nullable()->default(0);
+            $table->integer('completed_tasks')->nullable()->default(0);
+            $table->decimal('average_rating', 3, 2)->nullable()->default(0);
 
             // ⚙️ Laravel System Defaults
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index('role');
+            $table->index('status');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -11,9 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_history', function (Blueprint $table) {
+        Schema::create('project_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('action'); // 'created', 'updated', 'status_changed', 'assigned', 'progress_updated'
+            $table->text('description')->nullable();
+            $table->json('changes')->nullable(); // Track what changed
+            $table->string('ip_address')->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamps();
+            $table->index('project_id');
+            $table->index('user_id');
+            $table->index('created_at');
         });
     }
 
